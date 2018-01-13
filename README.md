@@ -32,6 +32,9 @@ Main PCB has a socket for Wemos D1 mini board, soldered DC jack and lots of pinh
  - Power jack is DS-201.
  - All servos are SG90. [SG90 SketchUp model](https://3dwarehouse.sketchup.com/model/b4d110b53afe39d821cd77f5063eab61/Servo-Tower-Pro-Micro-SG-90-with-horns) and was initially created by [James W.](https://3dwarehouse.sketchup.com/user/0712161666807539621944321/James-W?nav=models) and then updated by me according to real servos measurements.
  - Tact switches on buttons PCB are both 0350HIM-180G-G.
+ 
+### Firmware
+ESP8266 could be programmed via Arduino IDE, especially if you have development board like I do with usb hardware attached. You work with servos and inputs/outputs just like you do with Arduino. That means that your Arduino experience is relevant here and there are loads of info on the internet.
 
 
 ### Links to some parts
