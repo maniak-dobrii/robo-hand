@@ -6,7 +6,7 @@ Wi-Fi enabled robot that mimics human palm. Each finger is a set of rigid segmen
 
 You'll need [SketchUp](https://www.sketchup.com/) to export frame models for printing, palm is available in both `.stl` and `.skp`. [Autodesk Eagle](https://www.autodesk.com/products/eagle/free-download) is required  to export mask for PCB. Both SketchUp and Eagle have free versions enough for export.
 
-Currently Wi-Fi connectivity is not utilized, robot is controlled by two physical buttons, one for finger gesture, one for sign of the horns. 
+Currently there is basic Wi-Fi-based control and two physical buttons, one for finger gesture, one for sign of the horns. Device spawns Wi-Fi hot spot and HTTP server, that serves HTML and performs gestures on GET.
 
 ### Palm
 Palm itself is based on [design by Juan Gutierrez](https://www.thingiverse.com/thing:14986). In original design I didn't like thumb placement. If you only need the palm, I have it on [thingiverse](https://www.thingiverse.com/thing:2743350).
