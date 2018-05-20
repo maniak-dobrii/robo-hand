@@ -19,6 +19,14 @@ const int servoCount = 5; // 5 fingers, right?
 Servo servo[servoCount]; // servos to be attached
 kRHBindingDirection bindings[servoCount]; // binding direction for each servo, see description above
 
+const uint8_t kKozaButtonPin = D1;
+const uint8_t kFuckButtonPin = D2;
+
+PalmHardware::PalmHardware() {
+  this->buttonsCallback = nullptr;
+  this->buttonsListener = new ButtonListener(this);
+}
+
 void PalmHardware::setup() {
   //
   // servos
@@ -39,8 +47,10 @@ void PalmHardware::setup() {
 
   //
   // buttons
-  pinMode(D1, INPUT_PULLUP);
-  pinMode(D2, INPUT_PULLUP);
+  pinMode(kKozaButtonPin, INPUT_PULLUP);
+  pinMode(kFuckButtonPin, INPUT_PULLUP);
+  this->buttonsListener->listenButtonOnPin(kKozaButtonPin);
+  this->buttonsListener->listenButtonOnPin(kFuckButtonPin);
 
   //
   // Extend all fingers on start, that helps to avoid bugs
@@ -50,11 +60,82 @@ void PalmHardware::setup() {
 }
 
 PalmHardware::~PalmHardware() {
+  delete this->buttonsListener;
+  this->buttonsListener = nullptr;
+  
   for(int i=0; i<servoCount; i++) {
     servo[i].detach();
   }
 }
 
+
+void PalmHardware::updateButtons() {
+  this->buttonsListener->update();
+}
+
+void PalmHardware::setButtonsCallback(RHButtonsCallback callback) {
+  this->buttonsCallback = callback;
+}
+
+void PalmHardware::onButtonListenerEvent(ButtonListener *buttonListener, kButtonListenerEvent event, uint8_t pin) {
+
+  kRHButtonEvent callbackEvent;
+  kRHButton callbackButton;
+
+  if(this->buttonEventForButtonListenerEvent(event, &callbackEvent) &&
+    this->buttonForPin(pin, &callbackButton)) {
+      notifyButtonEvent(callbackButton, callbackEvent);
+  }
+}
+
+bool PalmHardware::buttonEventForButtonListenerEvent(kButtonListenerEvent event, kRHButtonEvent *output) {
+  kRHButtonEvent outputEvent;
+  
+  switch(event) {
+    case kButtonListenerEventButtonDown: {
+      outputEvent = kRHButtonEventDown;
+      break;
+    }
+    
+    case kButtonListenerEventButtonUp: {
+      outputEvent = kRHButtonEventUp;
+      break;
+    }
+
+    default: {
+      return false;
+    }
+  }
+
+  if(output != nullptr) {
+    *output = outputEvent;
+  }
+
+  return true;
+}
+
+bool PalmHardware::buttonForPin(uint8_t pin, kRHButton *output) {
+  kRHButton outputButton;
+  
+  if(pin == kKozaButtonPin) {
+    outputButton = kRHButtonKoza;
+  } else if(pin == kFuckButtonPin) {
+    outputButton = kRHButtonFuck;
+  } else {
+    return false;
+  }
+
+  if(output != nullptr) {
+    *output = outputButton;
+  }
+  return true;
+}
+
+void PalmHardware::notifyButtonEvent(kRHButton button, kRHButtonEvent event) {
+  if(this->buttonsCallback != nullptr) {
+    this->buttonsCallback(button, event);
+  }
+}
 
 ///////////////////////////
 // Helpers

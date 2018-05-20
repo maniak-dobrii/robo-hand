@@ -60,6 +60,7 @@ void handleGesture() {
 void setup() {
   //setupWiFiAndServer();
   palm.setup();
+  palm.setButtonsCallback(onButtonsEvent);
 }
 
 //void loop() {
@@ -95,10 +96,10 @@ void setupWiFiAndServer() {
 void loop() 
 {
   commandDispatcher.dispatch(millis());
-  
-  checkButtonAndFuck();
-  checkButtonAndKoza();
+
+  palm.updateButtons();
 } 
+
 
 
 void koza() {
@@ -115,53 +116,41 @@ void fullOpen() {
 
 
 Milliseconds lastPerformTimestamp = 0;
-Milliseconds buttonPerformThresold = 1000;
-bool holdingButtonGesture = false;
+Milliseconds gesturePerformThresold = 1000;
 
-// Check if button on `D1` is pushed and present "Koza" gesture (sign of the horns).
-// Blocking debounce, I'll switch to non-blocking if I continue.
-void checkButtonAndKoza() {
-  if (digitalRead(D1) == LOW && (millis() > lastPerformTimestamp + buttonPerformThresold)) {
-    delay(50); // yepp, it will eat 50ms, but that's fine for our purposes
-    if(digitalRead(D1) == HIGH) return;
+void onButtonsEvent(kRHButton button, kRHButtonEvent event) {
+  /*
+   * I wanted better UX when you can have two things:
+   *  1. Fast button press => palm perfoms gesture and expands back
+   *  2. Press and hold => palm holds gesture and keeps it until you release the button
+   *  
+   *  That's why here on button Up fullOpen is immediately scheduled, while
+   *  on button Down gesture is only scheduled if time thresold passed.
+   */
+  
+  Milliseconds timeFromLastPerform = millis() - lastPerformTimestamp;
+  
+  if(event == kRHButtonEventUp) {
+    Milliseconds afterDelay = (timeFromLastPerform > 500) ? 0 : 500;
+    commandDispatcher.push(afterDelay, new FunctionCommand(fullOpen));
+  } else {
+    if(timeFromLastPerform > gesturePerformThresold) {
+      Command *command = nullptr;
 
-    commandDispatcher.push(0, new FunctionCommand(koza));
-    holdingButtonGesture = true;
+      switch(button) {
+        case kRHButtonKoza: {
+          command = new FunctionCommand(koza);
+          break;
+        }
 
-    lastPerformTimestamp = millis();
-  }
+        case kRHButtonFuck: {
+          command = new FunctionCommand(fuck);
+          break;
+        }
+      }
 
-  if(holdingButtonGesture && (digitalRead(D1) == HIGH) && (millis() > lastPerformTimestamp + buttonPerformThresold)) {
-    delay(50);
-    if(digitalRead(D1) == LOW) return;
-
-    holdingButtonGesture = false;
-    commandDispatcher.push(150, new FunctionCommand(fullOpen));
-
-    lastPerformTimestamp = millis();
-  }
-}
-
-// Check if button on `D2` is pushed and present "Fuck you" gesture.
-// Blocking debounce, I'll switch to non-blocking if I continue.
-void checkButtonAndFuck() {
-  if (digitalRead(D2) == LOW && (millis() > lastPerformTimestamp + buttonPerformThresold)) {
-    delay(50); // yepp, it will eat 50ms, but that's fine for our purposes
-    if(digitalRead(D2) == HIGH) return;
-
-    commandDispatcher.push(0, new FunctionCommand(fuck));
-    holdingButtonGesture = true;
-
-    lastPerformTimestamp = millis();
-  }
-
-  if(holdingButtonGesture && (digitalRead(D2) == HIGH) && (millis() > lastPerformTimestamp + buttonPerformThresold)) {
-    delay(50);
-    if(digitalRead(D2) == LOW) return;
-
-    holdingButtonGesture = false;
-    commandDispatcher.push(150, new FunctionCommand(fullOpen));
-
-    lastPerformTimestamp = millis();
+      commandDispatcher.push(0, command);
+      lastPerformTimestamp = millis();
+    }
   }
 }
