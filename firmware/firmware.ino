@@ -1,72 +1,53 @@
-// MANIAK_dobrii's Robo hand firmware prototype
+/*
+ * MANIAK_dobrii's Robo hand firmware.
+ * 
+ * Currently you need to connect to Wi-Fi hotspot, html-based control is available on 192.168.4.1, will switch to (maybe) JSON API later.
+ * Hardware buttons control is as well available, you can press/release, press/hold/release.
+ */
 
 #include "CommandDispatcher/command_loop.h"
 #include "CommandDispatcher/function_command.h"
 #include "PalmHardware.h"
 
-
-CommandDispatcher commandDispatcher(64);
-PalmHardware palm;
-
-
-
-
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h> 
 #include <ESP8266WebServer.h>
 
-/* Set these to your desired credentials. */
+
+CommandDispatcher commandDispatcher(64); // 64 - max number of waiting commands
+PalmHardware palm;
+
+// Wi-Fi hotspot configuration
 const char *ssid = "robo-hand";
 const char *password = "robo-hand";
 
 ESP8266WebServer server(80);
 
 
-void sendControlPage() {
-  server.send(200, "text/html", "<a href=\"koza\">koza</a>  |  <a href=\"fuck\">fuck</a>");  
-}
+//
+// Basic palm operations
+//
+void koza();
+void fuck();
+void fullOpen();
 
-
-void handleRoot() {
-  sendControlPage();
-}
-
-void handleKoza() {
-  sendControlPage();
-
-  palm.koza();
-  delay(1000);
-  palm.fullOpen();
-}
-
-void handleFuck() {
-  sendControlPage();
-
-  palm.fuck();
-  delay(1000);
-  palm.fullOpen();
-}
-
-void handleGesture() {
-
-  String value = server.arg("thumb");
-  if(value.length() > 0) {
-    palm.extendFinger(kRHFingerThumb, value.toFloat());
-  }
-}
+//
+// ServerCommands
+//
+void sendControlPage();
+void handleRoot();
+void handleKoza();
+void handleFuck();
+void handleGesture();
 
 
 
 void setup() {
-  //setupWiFiAndServer();
   palm.setup();
   palm.setButtonsCallback(onButtonsEvent);
+
+  setupWiFiAndServer();
 }
-
-//void loop() {
-//  server.handleClient();
-//}
-
 
 void setupWiFiAndServer() {
   delay(1000);
@@ -87,34 +68,17 @@ void setupWiFiAndServer() {
   Serial.println("HTTP server started");  
 }
 
-
-
-
-
-
-
 void loop() 
 {
   commandDispatcher.dispatch(millis());
-
   palm.updateButtons();
+  server.handleClient();
 } 
 
 
-
-void koza() {
-  palm.koza();
-}
-
-void fuck() {
-  palm.fuck();
-}
-
-void fullOpen() {
-  palm.fullOpen();
-}
-
-
+//
+// Button events processing
+//
 Milliseconds lastPerformTimestamp = 0;
 Milliseconds gesturePerformThresold = 1000;
 
@@ -153,4 +117,57 @@ void onButtonsEvent(kRHButton button, kRHButtonEvent event) {
       lastPerformTimestamp = millis();
     }
   }
+}
+
+
+//
+// Functions that could be passed into FunctionCommand.
+//
+void koza() {
+  palm.koza();
+}
+
+void fuck() {
+  palm.fuck();
+}
+
+void fullOpen() {
+  palm.fullOpen();
+}
+
+
+//
+// Server called functions
+//
+void sendControlPage() {
+  server.send(200, "text/html", "<a href=\"koza\">koza</a>  |  <a href=\"fuck\">fuck</a>");  
+}
+
+void handleRoot() {
+  sendControlPage();
+}
+
+void handleKoza() {
+  commandDispatcher.push(0, new FunctionCommand(koza));
+  commandDispatcher.push(500, new FunctionCommand(fullOpen));
+  
+  sendControlPage();
+}
+
+void handleFuck() {
+  commandDispatcher.push(0, new FunctionCommand(fuck));
+  commandDispatcher.push(500, new FunctionCommand(fullOpen));
+  
+  sendControlPage();
+}
+
+void handleGesture() {
+  // this needs work, so it is not implemented yet
+  
+//  String value = server.arg("thumb");
+//  if(value.length() > 0) {
+//    palm.extendFinger(kRHFingerThumb, value.toFloat());
+//  }
+
+  sendControlPage();
 }
