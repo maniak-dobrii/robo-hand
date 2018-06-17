@@ -5,9 +5,10 @@
  * Hardware buttons control is as well available, you can press/release, press/hold/release.
  */
 
-#include "CommandDispatcher/command_loop.h"
-#include "CommandDispatcher/function_command.h"
+#include "src/CommandDispatcher/command_loop.h"
+#include "src/CommandDispatcher/function_command.h"
 #include "PalmHardware.h"
+#include "SetPostureCommand.h"
 
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h> 
@@ -38,7 +39,8 @@ void sendControlPage();
 void handleRoot();
 void handleKoza();
 void handleFuck();
-void handleGesture();
+void handleSetPosture();
+void handleDeviceInfo();
 
 
 
@@ -60,10 +62,15 @@ void setupWiFiAndServer() {
   IPAddress myIP = WiFi.softAPIP();
   Serial.print("AP IP address: ");
   Serial.println(myIP);
+  //
+  // HTML API
   server.on("/", handleRoot);
   server.on("/koza", handleKoza);
   server.on("/fuck", handleFuck);
-  server.on("/gesture", handleGesture);
+  //
+  // JSON API
+  server.on("/setPosture", handleSetPosture);
+  server.on("/deviceInfo", handleDeviceInfo);
   server.begin();
   Serial.println("HTTP server started");  
 }
@@ -161,13 +168,54 @@ void handleFuck() {
   sendControlPage();
 }
 
-void handleGesture() {
-  // this needs work, so it is not implemented yet
+void handleSetPosture() {
+  String argString;
   
-//  String value = server.arg("thumb");
-//  if(value.length() > 0) {
-//    palm.extendFinger(kRHFingerThumb, value.toFloat());
-//  }
+  unsigned long after = 0;
+  argString = server.arg("afterMilliseconds");
+  if(argString.length() > 0) {
+    after = strtoul(argString.c_str(), NULL, 10);
+  }
 
-  sendControlPage();
+
+  float thumbExtensionRate = kNoChangeExtensionRate;
+  argString = server.arg("thumb");
+  if(argString.length() > 0) {
+    thumbExtensionRate = argString.toFloat();
+  }
+
+  
+  float indexExtensionRate = kNoChangeExtensionRate;
+  argString = server.arg("index");
+  if(argString.length() > 0) {
+    indexExtensionRate = argString.toFloat();
+  }
+
+  float middleExtensionRate = kNoChangeExtensionRate;
+  argString = server.arg("middle");
+  if(argString.length() > 0) {
+    middleExtensionRate = argString.toFloat();
+  }
+
+  float ringExtensionRate = kNoChangeExtensionRate;
+  argString = server.arg("ring");
+  if(argString.length() > 0) {
+    ringExtensionRate = argString.toFloat();
+  }
+
+  float pinkyExtensionRate = kNoChangeExtensionRate;
+  argString = server.arg("pinky");
+  if(argString.length() > 0) {
+    pinkyExtensionRate = argString.toFloat();
+  }
+
+  SetPostureCommand *setPostureCommand = new SetPostureCommand(&palm, thumbExtensionRate, indexExtensionRate, middleExtensionRate, ringExtensionRate, pinkyExtensionRate);
+  commandDispatcher.push(after, setPostureCommand);
+
+  server.send(200, "application/json", "\"OK\""); 
 }
+
+void handleDeviceInfo() {
+  server.send(200, "application/json", "{\"name\": \"MANIAK_dobrii's robo-hand mk1\", \"apiVersion\": \"0.0.1\"}"); 
+}
+

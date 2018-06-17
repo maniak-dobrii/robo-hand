@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch taskResult {
                 case .succeeded(let dataLayer):
                     self.dataLayer = dataLayer
+                    self.presentTestViewController(dataLayer: dataLayer)
                 
                 case .failed(let error):
                     os_log("Failed to init dataLayer with error: %{public}@", error.localizedDescription)
@@ -41,10 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    // MARK: - Private
+    private func presentTestViewController(dataLayer: DataLayer) {
+        let testViewController = TestViewController(dataLayer: dataLayer)
+        self.window?.rootViewController = testViewController
     }
 }
 

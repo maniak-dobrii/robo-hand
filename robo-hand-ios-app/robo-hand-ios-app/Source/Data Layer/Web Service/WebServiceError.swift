@@ -21,3 +21,21 @@ enum WebServiceError: Error {
     /// Something unclassified, user can't do anything
     case other(error: Error?)
 }
+
+extension WebServiceError: LocalizedError {
+    var localizedDescription: String {
+        switch self {
+            case .unableToConnect:
+                return "Unable to connect"
+            
+            case .badHTTPCode(let code, _):
+                return "Bad HTTP status code (\(code))"
+            
+            case .badResponseFormat(let json):
+                return "Bad response format: \(json ?? "<empty>")"
+            
+            case .other(let error):
+                return "Unclassified error: \(error)"
+        }
+    }
+}

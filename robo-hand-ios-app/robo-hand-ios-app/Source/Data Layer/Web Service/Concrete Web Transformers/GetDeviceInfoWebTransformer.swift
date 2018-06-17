@@ -12,11 +12,7 @@ final class GetDeviceInfoWebTransformer: WebTransformer {
     typealias CompletionHandler = TaskResultCompletionBlock<DeviceInfo, WebServiceError>
     
     private let webService: JSONOverHTTPService
-    
-    struct DeviceInfo {
-        let name: String
-        let versionString: String
-    }
+
     
     init(webService: JSONOverHTTPService) {
         self.webService = webService
@@ -57,7 +53,7 @@ final class GetDeviceInfoWebTransformer: WebTransformer {
         }
         
         guard let name: String = jsonObject["name"] as? String else { throw "Bad name" }
-        guard let versionString: String = jsonObject["version"] as? String else { throw "Bad version" }
+        guard let versionString: String = jsonObject["apiVersion"] as? String else { throw "Bad version" }
         
         return DeviceInfo(name: name, versionString: versionString)
     }

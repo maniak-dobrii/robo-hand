@@ -17,6 +17,9 @@
 		28C99C4020D6BA3F00504F0F /* SetPostureWebTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C3F20D6BA3F00504F0F /* SetPostureWebTransformer.swift */; };
 		28C99C4320D6C77400504F0F /* GetDeviceInfoWebTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4220D6C77400504F0F /* GetDeviceInfoWebTransformer.swift */; };
 		28C99C4520D6CA8500504F0F /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4420D6CA8500504F0F /* String+Error.swift */; };
+		28C99C4820D6F3BE00504F0F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4720D6F3BE00504F0F /* DeviceInfo.swift */; };
+		28C99C4A20D6F66400504F0F /* Posture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4920D6F66400504F0F /* Posture.swift */; };
+		28C99C4C20D6FEA200504F0F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4B20D6FEA200504F0F /* TestViewController.swift */; };
 		28CFEF1C20D5C9F800AFDD90 /* JSONOverHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CFEF1B20D5C9F800AFDD90 /* JSONOverHTTPService.swift */; };
 		28CFEF1E20D5CA3D00AFDD90 /* WebTransformerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CFEF1D20D5CA3D00AFDD90 /* WebTransformerConfiguration.swift */; };
 		28CFEF2220D66DCB00AFDD90 /* CancellableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CFEF2120D66DCB00AFDD90 /* CancellableTask.swift */; };
@@ -37,6 +40,9 @@
 		28C99C4120D6BA9600504F0F /* robo-hand API Description.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "robo-hand API Description.md"; sourceTree = "<group>"; };
 		28C99C4220D6C77400504F0F /* GetDeviceInfoWebTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDeviceInfoWebTransformer.swift; sourceTree = "<group>"; };
 		28C99C4420D6CA8500504F0F /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
+		28C99C4720D6F3BE00504F0F /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
+		28C99C4920D6F66400504F0F /* Posture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posture.swift; sourceTree = "<group>"; };
+		28C99C4B20D6FEA200504F0F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		28CFEF1B20D5C9F800AFDD90 /* JSONOverHTTPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONOverHTTPService.swift; sourceTree = "<group>"; };
 		28CFEF1D20D5CA3D00AFDD90 /* WebTransformerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTransformerConfiguration.swift; sourceTree = "<group>"; };
 		28CFEF2120D66DCB00AFDD90 /* CancellableTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableTask.swift; sourceTree = "<group>"; };
@@ -87,6 +93,7 @@
 			children = (
 				28C6B1F32027725A00B89BFC /* AppDelegate.swift */,
 				28C6B1F52027730500B89BFC /* Data Layer */,
+				28C99C4B20D6FEA200504F0F /* TestViewController.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -99,6 +106,7 @@
 				28CFEF1A20D5C9F800AFDD90 /* Web Service */,
 				28CFEF2120D66DCB00AFDD90 /* CancellableTask.swift */,
 				28C99C4420D6CA8500504F0F /* String+Error.swift */,
+				28C99C4620D6F3B400504F0F /* Model */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -111,6 +119,15 @@
 				28C99C4220D6C77400504F0F /* GetDeviceInfoWebTransformer.swift */,
 			);
 			path = "Concrete Web Transformers";
+			sourceTree = "<group>";
+		};
+		28C99C4620D6F3B400504F0F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				28C99C4720D6F3BE00504F0F /* DeviceInfo.swift */,
+				28C99C4920D6F66400504F0F /* Posture.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		28CFEF1A20D5C9F800AFDD90 /* Web Service */ = {
@@ -207,12 +224,15 @@
 			files = (
 				28C99C3B20D6721800504F0F /* WebTransformer.swift in Sources */,
 				28CFEF1E20D5CA3D00AFDD90 /* WebTransformerConfiguration.swift in Sources */,
+				28C99C4820D6F3BE00504F0F /* DeviceInfo.swift in Sources */,
 				28CFEF1C20D5C9F800AFDD90 /* JSONOverHTTPService.swift in Sources */,
 				28C99C4320D6C77400504F0F /* GetDeviceInfoWebTransformer.swift in Sources */,
 				28C99C4520D6CA8500504F0F /* String+Error.swift in Sources */,
 				28F4D923204066E200F177FF /* LightweightLaunchViewController.swift in Sources */,
 				28CFEF2220D66DCB00AFDD90 /* CancellableTask.swift in Sources */,
+				28C99C4A20D6F66400504F0F /* Posture.swift in Sources */,
 				28C99C3D20D672EB00504F0F /* WebServiceError.swift in Sources */,
+				28C99C4C20D6FEA200504F0F /* TestViewController.swift in Sources */,
 				28C99C4020D6BA3F00504F0F /* SetPostureWebTransformer.swift in Sources */,
 				287E17C12041D7E1009C5C85 /* TaskResult.swift in Sources */,
 				28C6B1F42027725A00B89BFC /* AppDelegate.swift in Sources */,

@@ -10,6 +10,8 @@ import Foundation
 
 final class SetPostureWebTransformer: WebTransformer {
     private let webService: JSONOverHTTPService
+    
+    typealias Milliseconds = UInt
 
     /// Describes palm posture, 0 => closed, 1 => opened
     struct PostureDescriptor {
@@ -26,8 +28,9 @@ final class SetPostureWebTransformer: WebTransformer {
     
     func setPosture(configuration: WebTransformerConfiguration,
                     posture: PostureDescriptor,
+                    after: Milliseconds,
                     completionHandler: TaskResultCompletionBlock<Void, WebServiceError>?) -> CancellableTask? {
-        let parameters = self.requestParameters(forPosture: posture)
+        let parameters = self.requestParameters(forPosture: posture, after: after)
         return self.webService.get(baseURLString: configuration.baseURLString,
                                    path: "setPosture",
                                    parameters: parameters,
@@ -45,8 +48,11 @@ final class SetPostureWebTransformer: WebTransformer {
     }
     
     // MARK: - Private
-    func requestParameters(forPosture posture: PostureDescriptor) -> JSONOverHTTPService.RequestParameters {
+    func requestParameters(forPosture posture: PostureDescriptor,
+                           after: Milliseconds) -> JSONOverHTTPService.RequestParameters {
         var parameters: JSONOverHTTPService.RequestParameters = [:]
+        
+        parameters["afterMilliseconds"] = "\(after)"
         
         if let thumb = posture.thumbExtensionRate {
             parameters["thumb"] = "\(thumb)"

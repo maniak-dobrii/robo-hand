@@ -37,12 +37,13 @@ Asks device to flex fingers so that they form desired posture. Response contains
 
 **Request parameters:**
 thumb: Float - thumb extension rate, 0 - closed, 1 - fully extended
-index: Float - thumb extension rate, 0 - closed, 1 - fully extended
-middle:Float - thumb extension rate, 0 - closed, 1 - fully extended
-ring: Float - thumb extension rate, 0 - closed, 1 - fully extended
-pinky: Float - thumb extension rate, 0 - closed, 1 - fully extended
+index: Float - index finger extension rate, 0 - closed, 1 - fully extended
+middle:Float - middle finger extension rate, 0 - closed, 1 - fully extended
+ring: Float - ring finger extension rate, 0 - closed, 1 - fully extended
+pinky: Float - pinky finger extension rate, 0 - closed, 1 - fully extended
+afterMilliseconds: Int - min time in milliseconds to wait before setting gesture, default is 0
 
-Every parameter is optional. If argument not supplied corresponding finger is not moved.
+Every finger extension rate parameter is optional. If argument not supplied corresponding finger is not moved.
 
 **Response schema:**
 "OK"

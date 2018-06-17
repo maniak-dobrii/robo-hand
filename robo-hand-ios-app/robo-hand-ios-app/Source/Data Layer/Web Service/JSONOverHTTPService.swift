@@ -54,6 +54,7 @@ class JSONOverHTTPService {
         configuration.httpMaximumConnectionsPerHost = 1 // server in device supports only one simultaneous connection
         configuration.urlCache = nil // disable response caching
         configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData // no caching
+        configuration.timeoutIntervalForRequest = 2 // local network
         
         self.session = URLSession(configuration: configuration)
     }
@@ -97,7 +98,9 @@ class JSONOverHTTPService {
     
     // MARK: - Private
     private func processDataTask(data: Data?, urlResponse: URLResponse?, error: Error?) -> Result {
-        guard let httpURLResponse = urlResponse as? HTTPURLResponse else { return .failed(error: .other(error: nil)) }
+        guard let httpURLResponse = urlResponse as? HTTPURLResponse else {
+            return self.processFailedDataTaskURLTaskError(error)
+        }
         
         if let data = data {
             let httpCode: Int = httpURLResponse.statusCode
