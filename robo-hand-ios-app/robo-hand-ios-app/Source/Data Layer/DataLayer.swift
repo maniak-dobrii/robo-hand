@@ -14,7 +14,7 @@ final class DataLayer {
     
     private init() {}
     
-    class func createAndConfigure(with completionHandler: TaskResultCompletionBlock<DataLayer, ConfigurationError>) {
+    class func createAndConfigure(with completionHandler: @escaping TaskResultCompletionBlock<DataLayer, ConfigurationError>) {
         let dataLayer = DataLayer()
         
         DispatchQueue.main.async {
