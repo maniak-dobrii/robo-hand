@@ -35,7 +35,7 @@ extension WebServiceError: LocalizedError {
                 return "Bad response format: \(json ?? "<empty>")"
             
             case .other(let error):
-                return "Unclassified error: \(error)"
+                return "Unclassified error: \(error ?? "<nil>")"
         }
     }
 }

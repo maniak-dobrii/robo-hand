@@ -77,7 +77,7 @@ class LightweightLaunchViewController: UIViewController {
     // presents only if it is not already presented
     private func displayActivityIndicatorAnimated() {
         if self.activityIndicator == nil {
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
             // layout is managed in
             activityIndicator.translatesAutoresizingMaskIntoConstraints = true
             activityIndicator.alpha = 0.0
