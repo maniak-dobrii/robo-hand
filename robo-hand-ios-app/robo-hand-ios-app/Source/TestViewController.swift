@@ -33,7 +33,7 @@ final class TestViewController: UIViewController {
     }
     
     // MARK: - Private
-    // MAEK: - UI
+    // MARK: - UI
     private func setupSubviews(inContainer container: UIView) {
         let deviceInfoButton = self.makeButton(title: "Get device info", selector: #selector(onDeviceInfoTapped))
         let fuckButton = self.makeButton(title: "Fuck", selector: #selector(onFuckButtonTapped))
@@ -69,7 +69,7 @@ final class TestViewController: UIViewController {
     // MARK: - Actions
     @objc
     func onDeviceInfoTapped() {
-        self.dataLayer.getDeviceInfo { (taskResult) in
+        self.dataLayer.palmControlService.getDeviceInfo { (taskResult) in
             self.showDeviceInfoTaskResult(taskResult)
         }
     }
@@ -81,7 +81,7 @@ final class TestViewController: UIViewController {
                                   middleExtensionRate: 1,
                                   ringExtensionRate: 0,
                                   pinkyExtensionRate: 0)
-        self.dataLayer.sendSetPostureCommand(after: 0, posture: fuckPosture) { (taskResult) in
+        self.dataLayer.palmControlService.sendSetPostureCommand(after: 0, posture: fuckPosture) { (taskResult) in
             self.showSetPostureTaskResult(taskResult)
         }
     }
@@ -93,7 +93,7 @@ final class TestViewController: UIViewController {
                                          middleExtensionRate: 0,
                                          ringExtensionRate: 0,
                                          pinkyExtensionRate: 1)
-        self.dataLayer.sendSetPostureCommand(after: 0, posture: signOfHornsPosture) { (taskResult) in
+        self.dataLayer.palmControlService.sendSetPostureCommand(after: 0, posture: signOfHornsPosture) { (taskResult) in
             self.showSetPostureTaskResult(taskResult)
         }
     }
@@ -105,13 +105,13 @@ final class TestViewController: UIViewController {
                                          middleExtensionRate: 1,
                                          ringExtensionRate: 1,
                                          pinkyExtensionRate: 1)
-        self.dataLayer.sendSetPostureCommand(after: 0, posture: allExtendedPosture) { (taskResult) in
+        self.dataLayer.palmControlService.sendSetPostureCommand(after: 0, posture: allExtendedPosture) { (taskResult) in
             self.showSetPostureTaskResult(taskResult)
         }
     }
     
     // MARK: - Notifications
-    private func showDeviceInfoTaskResult(_ taskResult: TaskResult<DeviceInfo, DataLayer.GetDeviceInfoError>) {
+    private func showDeviceInfoTaskResult(_ taskResult: TaskResult<DeviceInfo, PalmControlServiceProtocol.GetDeviceInfoError>) {
         let title: String?
         let body: String?
 
@@ -130,7 +130,7 @@ final class TestViewController: UIViewController {
         self.showNotificationAlert(withTitle: title, body: body)
     }
     
-    private func showSetPostureTaskResult(_ taskResult: TaskResult<Void, DataLayer.SetPostureError>) {
+    private func showSetPostureTaskResult(_ taskResult: TaskResult<Void, PalmControlServiceProtocol.SetPostureError>) {
         let title: String?
         let body: String?
         
