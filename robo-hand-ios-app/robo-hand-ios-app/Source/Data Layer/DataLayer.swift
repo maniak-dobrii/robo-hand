@@ -12,11 +12,6 @@ final class DataLayer {
     public enum ConfigurationError: Error, LocalizedError {
     }
     
-    var palmControlService: PalmControlServiceProtocol {
-        return self._palmControlService
-    }
-    
-    
     // @MANIAK_dobrii: Currently it is constant until I implement connectivity settings in app
     private let configuration: WebTransformerConfiguration
     
@@ -35,5 +30,11 @@ final class DataLayer {
         DispatchQueue.main.async {
             completionHandler(.succeeded(result: dataLayer))
         }
+    }
+}
+
+extension DataLayer: ServicesProviderProtocol {
+    var palmControlService: PalmControlServiceProtocol {
+        return self._palmControlService
     }
 }

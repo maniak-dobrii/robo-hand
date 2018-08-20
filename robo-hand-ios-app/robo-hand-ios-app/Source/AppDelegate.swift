@@ -12,21 +12,26 @@ import os.log
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    let window: UIWindow
     
     var dataLayer: DataLayer?
+    var rootModule: RootModule?
+    
+    override init() {
+        self.window = UIWindow()
+    }
 
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        self.setupWindowAndPresentFastLoadingScreen()
+        self.setupWindowAndPresentFastLoadingScreen(inWindow: self.window)
         
         DataLayer.createAndConfigure { (taskResult) in
             switch taskResult {
                 case .succeeded(let dataLayer):
                     self.dataLayer = dataLayer
-                    self.presentTestViewController(dataLayer: dataLayer)
+                    self.rootModule = RootModule.make(withServices: dataLayer, andPresentInWindow: self.window)
                 
                 case .failed(let error):
                     os_log("Failed to init dataLayer with error: %{public}@", error.localizedDescription)
@@ -42,21 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    // MARK: - Private
-    private func presentTestViewController(dataLayer: DataLayer) {
-        let testViewController = TestViewController(dataLayer: dataLayer)
-        self.window?.rootViewController = testViewController
-    }
 }
 
 extension AppDelegate {
-    fileprivate func setupWindowAndPresentFastLoadingScreen() {
-        let window = UIWindow()
+    private func setupWindowAndPresentFastLoadingScreen(inWindow: UIWindow) {
         window.rootViewController = LightweightLaunchViewController()
-        
         window.makeKeyAndVisible()
-        
-        self.window = window
     }
 }

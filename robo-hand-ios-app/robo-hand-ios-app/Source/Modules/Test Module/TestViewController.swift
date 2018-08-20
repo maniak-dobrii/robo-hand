@@ -8,11 +8,14 @@
 
 import UIKit
 
+// @MANIAK_dobrii: view controllers shouldn't directly use services, this should be refactored later, anyway,
+//                  that's something named `TestViewController` what did you expect?
+
 final class TestViewController: UIViewController {
-    private let dataLayer: DataLayer
+    private let palmControlService: PalmControlServiceProtocol
     
-    init(dataLayer: DataLayer) {
-        self.dataLayer = dataLayer
+    init(palmControlService: PalmControlServiceProtocol) {
+        self.palmControlService = palmControlService
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -49,8 +52,8 @@ final class TestViewController: UIViewController {
         container.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: container.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: container.safeAreaLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: container.safeAreaLayoutGuide.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
             ])
@@ -69,7 +72,7 @@ final class TestViewController: UIViewController {
     // MARK: - Actions
     @objc
     func onDeviceInfoTapped() {
-        self.dataLayer.palmControlService.getDeviceInfo { (taskResult) in
+        self.palmControlService.getDeviceInfo { (taskResult) in
             self.showDeviceInfoTaskResult(taskResult)
         }
     }
@@ -81,7 +84,7 @@ final class TestViewController: UIViewController {
                                   middleExtensionRate: 1,
                                   ringExtensionRate: 0,
                                   pinkyExtensionRate: 0)
-        self.dataLayer.palmControlService.sendSetPostureCommand(after: 0, posture: fuckPosture) { (taskResult) in
+        self.palmControlService.sendSetPostureCommand(after: 0, posture: fuckPosture) { (taskResult) in
             self.showSetPostureTaskResult(taskResult)
         }
     }
@@ -93,7 +96,7 @@ final class TestViewController: UIViewController {
                                          middleExtensionRate: 0,
                                          ringExtensionRate: 0,
                                          pinkyExtensionRate: 1)
-        self.dataLayer.palmControlService.sendSetPostureCommand(after: 0, posture: signOfHornsPosture) { (taskResult) in
+        self.palmControlService.sendSetPostureCommand(after: 0, posture: signOfHornsPosture) { (taskResult) in
             self.showSetPostureTaskResult(taskResult)
         }
     }
@@ -105,7 +108,7 @@ final class TestViewController: UIViewController {
                                          middleExtensionRate: 1,
                                          ringExtensionRate: 1,
                                          pinkyExtensionRate: 1)
-        self.dataLayer.palmControlService.sendSetPostureCommand(after: 0, posture: allExtendedPosture) { (taskResult) in
+        self.palmControlService.sendSetPostureCommand(after: 0, posture: allExtendedPosture) { (taskResult) in
             self.showSetPostureTaskResult(taskResult)
         }
     }

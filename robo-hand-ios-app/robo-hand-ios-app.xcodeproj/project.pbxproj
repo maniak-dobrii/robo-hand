@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280EF2C32129A3D90002EE13 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280EF2C22129A3D90002EE13 /* MainMenuViewController.swift */; };
+		280EF2C52129A3FF0002EE13 /* MainMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280EF2C42129A3FF0002EE13 /* MainMenuPresenter.swift */; };
 		2875D69D21208B7700D06E5E /* WebServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D69521208B7700D06E5E /* WebServiceError.swift */; };
 		2875D69E21208B7700D06E5E /* WebTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D69621208B7700D06E5E /* WebTransformer.swift */; };
 		2875D69F21208B7700D06E5E /* WebTransformerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D69721208B7700D06E5E /* WebTransformerConfiguration.swift */; };
@@ -16,6 +18,15 @@
 		2875D6A321208B7700D06E5E /* JSONOverHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D69C21208B7700D06E5E /* JSONOverHTTPService.swift */; };
 		2875D6AB2120918500D06E5E /* PalmControlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6A92120918500D06E5E /* PalmControlService.swift */; };
 		2875D6AC2120918500D06E5E /* PalmControlServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6AA2120918500D06E5E /* PalmControlServiceProtocol.swift */; };
+		2875D6B2212094E700D06E5E /* RootModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6B1212094E700D06E5E /* RootModule.swift */; };
+		2875D6B62120956C00D06E5E /* ServicesProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6B52120956C00D06E5E /* ServicesProviderProtocol.swift */; };
+		2875D6B82120975500D06E5E /* RootModuleNavigationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6B72120975500D06E5E /* RootModuleNavigationPresenter.swift */; };
+		2875D6BE2120CE0C00D06E5E /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6BD2120CE0C00D06E5E /* TestViewController.swift */; };
+		2875D6C02120CE2C00D06E5E /* TestModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6BF2120CE2C00D06E5E /* TestModule.swift */; };
+		2875D6C22120CE3600D06E5E /* TestPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6C12120CE3600D06E5E /* TestPresenter.swift */; };
+		2875D6C42120D05100D06E5E /* RootModuleEmbeddableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6C32120D05100D06E5E /* RootModuleEmbeddableModule.swift */; };
+		2875D6C62120D21C00D06E5E /* MainMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6C52120D21C00D06E5E /* MainMenuItem.swift */; };
+		2875D6C82120D46800D06E5E /* MainMenuItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2875D6C72120D46800D06E5E /* MainMenuItemsProvider.swift */; };
 		287E17C12041D7E1009C5C85 /* TaskResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287E17C02041D7E1009C5C85 /* TaskResult.swift */; };
 		28C6B1E820276DBE00B89BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C6B1E720276DBE00B89BFC /* Assets.xcassets */; };
 		28C6B1EB20276DBE00B89BFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28C6B1E920276DBE00B89BFC /* LaunchScreen.storyboard */; };
@@ -24,12 +35,13 @@
 		28C99C4520D6CA8500504F0F /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4420D6CA8500504F0F /* String+Error.swift */; };
 		28C99C4820D6F3BE00504F0F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4720D6F3BE00504F0F /* DeviceInfo.swift */; };
 		28C99C4A20D6F66400504F0F /* Posture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4920D6F66400504F0F /* Posture.swift */; };
-		28C99C4C20D6FEA200504F0F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99C4B20D6FEA200504F0F /* TestViewController.swift */; };
 		28CFEF2220D66DCB00AFDD90 /* CancellableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CFEF2120D66DCB00AFDD90 /* CancellableTask.swift */; };
 		28F4D923204066E200F177FF /* LightweightLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F4D922204066E200F177FF /* LightweightLaunchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		280EF2C22129A3D90002EE13 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		280EF2C42129A3FF0002EE13 /* MainMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuPresenter.swift; sourceTree = "<group>"; };
 		2875D69521208B7700D06E5E /* WebServiceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceError.swift; sourceTree = "<group>"; };
 		2875D69621208B7700D06E5E /* WebTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTransformer.swift; sourceTree = "<group>"; };
 		2875D69721208B7700D06E5E /* WebTransformerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTransformerConfiguration.swift; sourceTree = "<group>"; };
@@ -39,6 +51,15 @@
 		2875D69C21208B7700D06E5E /* JSONOverHTTPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONOverHTTPService.swift; sourceTree = "<group>"; };
 		2875D6A92120918500D06E5E /* PalmControlService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalmControlService.swift; sourceTree = "<group>"; };
 		2875D6AA2120918500D06E5E /* PalmControlServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalmControlServiceProtocol.swift; sourceTree = "<group>"; };
+		2875D6B1212094E700D06E5E /* RootModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModule.swift; sourceTree = "<group>"; };
+		2875D6B52120956C00D06E5E /* ServicesProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesProviderProtocol.swift; sourceTree = "<group>"; };
+		2875D6B72120975500D06E5E /* RootModuleNavigationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModuleNavigationPresenter.swift; sourceTree = "<group>"; };
+		2875D6BD2120CE0C00D06E5E /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		2875D6BF2120CE2C00D06E5E /* TestModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModule.swift; sourceTree = "<group>"; };
+		2875D6C12120CE3600D06E5E /* TestPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPresenter.swift; sourceTree = "<group>"; };
+		2875D6C32120D05100D06E5E /* RootModuleEmbeddableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModuleEmbeddableModule.swift; sourceTree = "<group>"; };
+		2875D6C52120D21C00D06E5E /* MainMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuItem.swift; sourceTree = "<group>"; };
+		2875D6C72120D46800D06E5E /* MainMenuItemsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuItemsProvider.swift; sourceTree = "<group>"; };
 		287E17C02041D7E1009C5C85 /* TaskResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResult.swift; sourceTree = "<group>"; };
 		28C6B1DD20276DBE00B89BFC /* robo-hand-ios-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "robo-hand-ios-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C6B1E720276DBE00B89BFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +70,6 @@
 		28C99C4420D6CA8500504F0F /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 		28C99C4720D6F3BE00504F0F /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		28C99C4920D6F66400504F0F /* Posture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posture.swift; sourceTree = "<group>"; };
-		28C99C4B20D6FEA200504F0F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		28CFEF2120D66DCB00AFDD90 /* CancellableTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableTask.swift; sourceTree = "<group>"; };
 		28F4D922204066E200F177FF /* LightweightLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightweightLaunchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		280EF2C12129A3D90002EE13 /* Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				280EF2C22129A3D90002EE13 /* MainMenuViewController.swift */,
+				280EF2C42129A3FF0002EE13 /* MainMenuPresenter.swift */,
+			);
+			path = "Main Menu";
+			sourceTree = "<group>";
+		};
 		2875D69321208B7700D06E5E /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +134,38 @@
 			path = "Palm Control Service";
 			sourceTree = "<group>";
 		};
+		2875D6AD2120949500D06E5E /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				2875D6AE212094A900D06E5E /* Root Module */,
+				2875D6BC2120CE0C00D06E5E /* Test Module */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		2875D6AE212094A900D06E5E /* Root Module */ = {
+			isa = PBXGroup;
+			children = (
+				280EF2C12129A3D90002EE13 /* Main Menu */,
+				2875D6B1212094E700D06E5E /* RootModule.swift */,
+				2875D6B72120975500D06E5E /* RootModuleNavigationPresenter.swift */,
+				2875D6C32120D05100D06E5E /* RootModuleEmbeddableModule.swift */,
+				2875D6C52120D21C00D06E5E /* MainMenuItem.swift */,
+				2875D6C72120D46800D06E5E /* MainMenuItemsProvider.swift */,
+			);
+			path = "Root Module";
+			sourceTree = "<group>";
+		};
+		2875D6BC2120CE0C00D06E5E /* Test Module */ = {
+			isa = PBXGroup;
+			children = (
+				2875D6BD2120CE0C00D06E5E /* TestViewController.swift */,
+				2875D6BF2120CE2C00D06E5E /* TestModule.swift */,
+				2875D6C12120CE3600D06E5E /* TestPresenter.swift */,
+			);
+			path = "Test Module";
+			sourceTree = "<group>";
+		};
 		28C6B1D420276DBE00B89BFC = {
 			isa = PBXGroup;
 			children = (
@@ -137,8 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				28C6B1F32027725A00B89BFC /* AppDelegate.swift */,
+				2875D6AD2120949500D06E5E /* Modules */,
 				28C6B1F52027730500B89BFC /* Data Layer */,
-				28C99C4B20D6FEA200504F0F /* TestViewController.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -146,6 +207,7 @@
 		28C6B1F52027730500B89BFC /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
+				2875D6B52120956C00D06E5E /* ServicesProviderProtocol.swift */,
 				28C6B1F62027731D00B89BFC /* DataLayer.swift */,
 				287E17C02041D7E1009C5C85 /* TaskResult.swift */,
 				28CFEF2120D66DCB00AFDD90 /* CancellableTask.swift */,
@@ -249,19 +311,29 @@
 				28C99C4820D6F3BE00504F0F /* DeviceInfo.swift in Sources */,
 				28C99C4520D6CA8500504F0F /* String+Error.swift in Sources */,
 				28F4D923204066E200F177FF /* LightweightLaunchViewController.swift in Sources */,
+				2875D6B2212094E700D06E5E /* RootModule.swift in Sources */,
+				2875D6C02120CE2C00D06E5E /* TestModule.swift in Sources */,
 				28CFEF2220D66DCB00AFDD90 /* CancellableTask.swift in Sources */,
 				2875D6AC2120918500D06E5E /* PalmControlServiceProtocol.swift in Sources */,
+				2875D6C82120D46800D06E5E /* MainMenuItemsProvider.swift in Sources */,
 				28C99C4A20D6F66400504F0F /* Posture.swift in Sources */,
+				280EF2C32129A3D90002EE13 /* MainMenuViewController.swift in Sources */,
 				2875D6A221208B7700D06E5E /* GetDeviceInfoWebTransformer.swift in Sources */,
 				2875D6AB2120918500D06E5E /* PalmControlService.swift in Sources */,
 				2875D6A321208B7700D06E5E /* JSONOverHTTPService.swift in Sources */,
+				2875D6BE2120CE0C00D06E5E /* TestViewController.swift in Sources */,
+				280EF2C52129A3FF0002EE13 /* MainMenuPresenter.swift in Sources */,
+				2875D6C22120CE3600D06E5E /* TestPresenter.swift in Sources */,
+				2875D6B82120975500D06E5E /* RootModuleNavigationPresenter.swift in Sources */,
 				2875D69D21208B7700D06E5E /* WebServiceError.swift in Sources */,
+				2875D6C42120D05100D06E5E /* RootModuleEmbeddableModule.swift in Sources */,
 				2875D69E21208B7700D06E5E /* WebTransformer.swift in Sources */,
-				28C99C4C20D6FEA200504F0F /* TestViewController.swift in Sources */,
 				2875D6A121208B7700D06E5E /* SetPostureWebTransformer.swift in Sources */,
+				2875D6B62120956C00D06E5E /* ServicesProviderProtocol.swift in Sources */,
 				287E17C12041D7E1009C5C85 /* TaskResult.swift in Sources */,
 				28C6B1F42027725A00B89BFC /* AppDelegate.swift in Sources */,
 				28C6B1F72027731D00B89BFC /* DataLayer.swift in Sources */,
+				2875D6C62120D21C00D06E5E /* MainMenuItem.swift in Sources */,
 				2875D69F21208B7700D06E5E /* WebTransformerConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
